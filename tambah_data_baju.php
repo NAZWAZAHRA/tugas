@@ -27,10 +27,9 @@
 
 <?php
 include "koneksi.php";
-include "data_baju.php";
 
 if(isset($_POST['proses'])){
-    mysqli_query($koneksi,"insert into databaju set
+    mysqli_query($koneksi, "insert into databaju set
     NIS = '$_POST[NIS]',
     nama = '$_POST[nama]',
     ukuran = '$_POST[ukuran]',
@@ -39,3 +38,32 @@ if(isset($_POST['proses'])){
     echo "Data baju baru telah tersimpan";
 }
 ?>
+
+<h3> Data Barang </h3>
+
+<table border="1">
+    <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Ukuran</th>
+        <th>Seragam</th>
+    </tr>
+
+    <?php
+    include "koneksi.php";
+
+    $no=1;
+    $ambildata = mysqli_query($koneksi,"select * from databaju");
+    /* While untuk mengulang */
+    while($tampil = mysqli_fetch_array($ambildata)){
+        echo"
+        <tr>
+        <td>$no</td>
+        <td>$tampil[Nama]</td>
+        <td>$tampil[Ukuran]</td>
+        <td>$tampil[Seragam]</td>
+        </tr>";
+        $no++;
+    }
+    ?>
+</table>
